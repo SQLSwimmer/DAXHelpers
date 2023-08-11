@@ -1,0 +1,25 @@
+DAX for creating a time table
+
+Table
+Transaction Time =  GENERATESERIES(0, 1239, 1)
+-->Change default column name to Minute of the Day
+
+Columns
+Time to the Minute = 
+    TIMEVALUE(
+        TIME(
+            FLOOR('Transaction Time'[Minute of the Day]/60, 1),
+            MOD('Transaction Time'[Minute of the Day], 60),
+            0
+        )
+    )
+--> Change Time to the Minute data type to Time	
+
+X Minute Slot pattern
+X Minute Slot = FLOOR('Transaction Time'[Minute of the Day]/X, 1) * X/1440
+so 5 minute slot would look like this
+5 Minute Slot = FLOOR('Transaction Time'[Minute of the Day]/5, 1) * 5/1440
+
+
+
+** the X Minute Slot columns must be changed to Time datatypes for this to display correctly
